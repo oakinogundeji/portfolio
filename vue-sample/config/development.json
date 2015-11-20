@@ -1,0 +1,7 @@
+{
+  "host": "http://localhost",
+  "devURL": "http://localhost:3030",
+  "env": "development",
+  "dbURL": "mongodb://localhost/VueRESTfulBackend",
+  "sessionSecret": "qwertyuiop123456789"
+}
