@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>VueJS Project</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="libs/normalize.min.css">
+        <link rel="stylesheet" href="libs/bootstrap.css">
+        <link rel="stylesheet" href="libs/font-awesome.min.css">
+
+        <style type="text/css">
+          .row {
+            margin: 10px 0;
+          }
+          .table button {
+            margin-left: 5px;
+            float: right;
+          }
+
+        </style>
+
+        <script src="libs/jQ-2.js"></script>
+        <script src="libs/bootstrap.min.js"></script>
+        <script src="libs/vue.js"></script>
+        <script src="libs/vue-router.js"></script>
+        <script src="libs/vue-resource.js"></script>
+    </head>
+    <body>
+
+      <script id="app-nav-tmpl8" type="text/x-template">
+        <div class="row">
+          <ul class="nav nav-tabs">
+            <li><a v-link="{ path: '/', exact: true }">Home</a></li>
+            <li><a v-link="{ name: 'customers' }">Customers</a></li>
+            <li><a v-link="{ name: 'contact-us' }">Contact Us</a></li>
+          </ul>
+        </div>
+      </script>
+
+      <script id="app-content-contact-tmpl8" type="text/x-template">
+        <div class="row">
+          <section class="col-md-8">
+            <h1>Contact Us</h1>
+            <div>
+              <p>{{greetings}}</p>
+            </div>
+            <div>
+              <a v-link="{name: 'msg'}"><button>Leave a message</button></a>
+            </div>
+          </section>
+          <router-view></router-view>
+        </div>
+      </script>
+
+      <script id="app-content-contact-msg-tmpl8" type="text/x-template">
+        <div class="row">
+          <section class="col-md-8">
+            <h1>Leave a Message</h1>
+            <div>
+              <form>
+                <div class="input-group">
+                  <input type="text" class="form-control"
+                  placeholder="Your Name...." v-model="name">
+                  <textarea name="name" rows="8" cols="40" class="form-control"
+                  placeholder="Leave a message" v-model="message"></textarea>
+                  <input type ="submit" class="btn btn-primary btn-default"
+                  :class="isValid" @click.prevent.stop="deliverMsg" value="Send">
+                </div>
+              </form>
+            </div>
+          </section>
+          <br>
+          <div class="">
+            <span>{{data | json}}</span>
+          </div>
+        </div>
+      </script>
+
+      <script id="app-content-customers-tmpl8" type="text/x-template">
+        <div class="row">
+          <section class="col-md-8">
+            <h1>Customers</h1>
+            <p>{{greetings}}</p>
+            <br>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <td>Name</td>
+                    <td>eMail</td>
+                    <td>Address</td>
+                    <td>Photo</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in userlist">
+                    <td>{{item.name}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.address}}</td>
+                    <td>
+                      <img :src="item.photo" :alt="item.name photo">
+                      <button class="btn btn-danger btn-xs"
+                      @click.stop.prevent="onClick(item)">X</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </script>
+
+      <script type="text/x-template" id="app-tmpl8">
+        <div class="container">
+          <app-nav></app-nav>
+          <div class="row" v-show="this.$route.path=='/'" >
+            <div class="col-md-8">
+              <h1>Welcome to Vue App</h1>
+            </div>
+          </div>
+          <router-view :userlist=userlist></router-view>
+
+
+          <pre>{{$data | json}}</pre>
+
+        </div>
+      </script>
+
+
+      <div id="app">
+        <router-view></router-view>
+      </div>
+
+
+      <script src="app.js"></script>
+    </body>
+</html>
