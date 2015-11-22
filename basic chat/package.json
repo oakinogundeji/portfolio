@@ -1,0 +1,31 @@
+{
+  "name": "chat2",
+  "version": "1.0.0",
+  "description": "A basic but well featured chat application based on socket.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Telios WebDev",
+  "license": "ISC",
+  "devDependencies": {
+    "morgan": "^1.6.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "connect-mongodb-session": "^1.0.5",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "formidable": "^1.0.17",
+    "mongoose": "^4.1.11",
+    "passport": "^0.3.0",
+    "passport-browserid": "^0.1.4",
+    "passport-facebook": "^2.0.0",
+    "passport-google-oauth": "^0.2.0",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.3",
+    "serve-favicon": "^2.3.0",
+    "socket.io": "^1.3.7"
+  }
+}

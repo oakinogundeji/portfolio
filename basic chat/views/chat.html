@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chat2 App | A Telios WebDev Product</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      $(function () {
+
+        var
+          socket = io(),
+          name,
+          msg,
+          chatrooms = [],
+          choice = false,
+          titleSet = false,
+          instructions,
+          publicChatMembersList,
+          privateChatMembersList,
+          $container = $('#chat-container'),
+          $display = $('#chat-display'),
+          $members = $('#members'),
+          $privateChat = $('#privateChat'),
+          $chat = $('#chat'),
+          $msg = $('#msg'),
+          $send = document.getElementById('send'),
+          $clear = document.getElementById('clear'),
+          $pChattoggle = $('#pChattoggle'),
+          $pShow = $('#instructionsDiv > p');
+
+        socket.on('connect', function () {
+          //debugger;
+          console.log('Connected to Chat2 Server');
+          while(!choice) {
+            name = prompt('Please input your username: ', 'John Doe');
+            if(name != null && name != 'John Doe') {
+              choice = true;
+            }
+          }
+          return socket.emit('set_name', name);
+        });
+
+        socket.on('disconnect', function () {
+          return console.log('Disconnected from the Chat2 Server!');
+        });
+
+        socket.on('name_set', function () {
+          if(titleSet == false) {
+            var title = '<p id="title">' + name + '</p>';
+            $container.prepend(title);
+            return titleSet = true;
+          }
+          return null;
+        });
+
+        socket.on('name_set_failed', function (data) {
+          //debugger;
+          choice = false;
+          var
+            response = JSON.parse(data),
+            msg = response.msg;
+          name = prompt(msg);
+          while(!choice) {
+            if(name != null && name != 'John Doe') {
+              choice = true;
+            }
+            if(name == null || name == 'John Doe') {
+              return socket.disconnect();
+            }
+          }
+          console.log(name);
+          return socket.emit('set_name', name);
+        });
+
+        socket.on('old_msgs', function (data) {
+          var
+            i,
+            length = data.length,
+            msg,
+            sender,
+            chatMsg;
+          for(i = 0; i < length ; i++) {
+            sender = data[i].sender;
+            msg = data[i].msg;
+            chatMsg = '<p class="chatMsg">' + sender + ': ' + msg + '</p>';
+            $display.append(chatMsg);
+          }
+        })
+
+        socket.on('chat_msg', function (data) {
+          var
+            content = JSON.parse(data),
+            msg = content.msg,
+            sender = content.sender,
+            chatMsg = '<p class="chatMsg">' + sender + ': ' + msg + '</p>';
+          return $display.prepend(chatMsg);
+        });
+
+        socket.on('server_msg', function (data) {
+          var
+            content = JSON.parse(data),
+            msg1 = content.msg,
+            sender = content.sender,
+            msg = '<p class="serverMsg">' + sender +': ' + msg1 + '</p>';
+          return $display.prepend(msg);
+        });
+
+        socket.on('update_members', function (data) {
+          var
+            list = JSON.parse(data),
+            member;
+          $members.html('');
+          $privateChat.html('');
+          list.forEach(function (name) {
+            member = '<p class="chatMember"><a href="' + name +'" class="chatMember">'+ name + '</a></p>';
+            $members.append(member);
+          });
+          publicChatMembersList = '<p class="chatMembersList">Public Chat Members</p>',
+          privateChatMembersList = '<p class="chatMembersList">Private Chat Members</p>';
+          $members.prepend(publicChatMembersList);
+          $privateChat.prepend(privateChatMembersList);
+          return null;
+        });
+
+        socket.on('req_private_chat', function (data) {
+          var
+            content = JSON.parse(data),
+            sender = content.sender,
+            msg = content.msg,
+            data,
+            response,
+            output = msg + ' from ' + sender + '\n' +
+              'if you accept click ok, else click cancel';
+            status = prompt(output);
+
+          if(status == '') {
+            //var
+            //  title = 'Private Chat between ' + name + ' and ' + sender;
+              data = {sender: sender, accepter: name},
+              response = JSON.stringify(data);
+            return socket.emit('private_chat_accepted', response);
+          }
+          else {
+              data = {sender: sender, rejecter: name},
+              response = JSON.stringify(data);
+            return socket.emit('private_chat_refused', response);
+          }
+          //return console.log(data);
+        });
+
+        socket.on('private_chat_enabled', function (data) {
+          var
+            reply = JSON.parse(data),
+            roomKey = reply.proomName,
+            friend = reply.sender;
+          instructions = '<div id="instructionsDiv"><p class="chatInstructions">To send a private chat';
+          instructions += ' to your friend, prefix the message with the roomKey';
+          instructions += ' <b>' + roomKey + '</b>. The private chat will not be stored in the dBase.';
+          instructions +=  'Example: "' + roomKey + ' Chat rockzx!!!"</p><br>';
+          instructions += '<button id="pChattoggle" class="border">toggle</button></div>';
+          $privateChat.html('');
+          $privateChat.prepend(instructions);
+          $privateChat.prepend(privateChatMembersList);
+          return console.log(data);
+        });
+
+        $chat.on({
+          submit: function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              var
+                msg,
+                sender,
+                chatMsg1,
+                chatMsg;
+              if($msg.val() != '') {
+                msg = $msg.val();
+                sender = name;
+                chatMsg1 = {sender: sender, msg: msg};
+                chatMsg = JSON.stringify(chatMsg1);
+                socket.emit('chat_msg', chatMsg);
+                return $msg.val('');
+              }
+              return null;
+            },
+            click: function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              var
+                msg,
+                sender,
+                chatMsg1,
+                chatMsg;
+              if((e.target == $send) && $msg.val() != '') {
+                msg = $msg.val();
+                sender = name;
+                chatMsg1 = {sender: sender, msg: msg};
+                chatMsg = JSON.stringify(chatMsg1);
+                socket.emit('chat_msg', chatMsg);
+                return $msg.val('');
+              }
+              if(e.target == $clear) {
+                return $display.html('');
+              }
+              return null;
+            }
+        });
+
+        $members.on('click', 'a', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var
+            targetSocket = $(this).attr('href'),
+            data = {
+              sender: name,
+              target: targetSocket};
+            msg = JSON.stringify(data);
+
+          if(name == targetSocket) {
+            return false;
+          }
+
+          console.log(msg);
+          return socket.emit('req_private_chat', msg);
+          }
+        );
+
+        $privateChat.on('click', $pChattoggle, function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          return $('#instructionsDiv > p').slideToggle('slow');
+        });
+      })
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="chat-container">
+        <div id="chat-display" class="border"></div>
+        <div id="privateChat" class="border sideDisplay"></div>
+        <div id="members" class="border sideDisplay"></div>
+        <form id="chat">
+          <input type="text" id="msg" class="border"><!--
+          --><input type="button" id="send" class="border" value="Send"><!--
+          --><input type="button" id="clear" class="border" value="Clear Chat History">
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,105 @@
+#chat, #chat-container {
+  position: relative;
+}
+
+#chat-container {
+  padding: 15px 0 0 35px;
+}
+
+.border {
+  border-radius: 5px;
+}
+
+.chatInstructions {
+  display: block;
+}
+
+.serverMsg, .chatMsg, .chatInstructions {
+  margin: 7px 0 0;
+  padding: 0 0 0 5px;
+}
+
+.serverMsg {
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+}
+
+#title {
+  margin: 5px 0;
+}
+
+#chat-display, #members, #privateChat {
+  border: 2px solid black;
+  display: inline-block;
+  overflow: auto;
+}
+
+#chat-display {
+  height: 500px;
+  width: 350px;
+  margin-bottom: 10px;
+}
+
+.sideDisplay {
+  position: relative;
+  height: 150px;
+  width: 200px;
+  margin-left: 10px;
+}
+
+#members {
+  bottom: 320px;
+  right: 218px;
+}
+
+#privateChat {
+  bottom: 50px;
+}
+
+.chatMembersList, .chatMember {
+  margin: 5px 0;
+}
+
+.chatMembersList {
+  text-align: center;
+  text-decoration: underline;
+  font-style: italic;
+  font-size: bold;
+  color: grey;
+}
+
+.chatMember {
+  font-family: monospace;
+  color: blue;
+  font-weight: 300;
+  padding-left: 10px;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+#msg, #send, #clear, #pChattoggle {
+  height: 25px;
+  border: 1px solid black;
+}
+
+#msg {
+  width: 275px;
+}
+
+#send, #pChattoggle {
+  width: 60px;
+  margin-left: 10px;
+}
+
+#pChattoggle {
+  position: relative;
+  bottom: 10px;
+}
+
+#clear {
+  width: 120px;
+  position: relative;
+  top: 40px;
+  right: 250px;
+}
