@@ -93,7 +93,6 @@ io.on('connection', function (socket) {
         if(err) {
           return errHandler(err);
         }
-        console.log('old msgs are - ',msgs);
         return socket.emit('old_msgs', msgs);
       });
     }
@@ -130,7 +129,7 @@ io.on('connection', function (socket) {
     console.log('the new room is',data);
     chatRooms.push(data);
     console.log('available rooms', chatRooms);
-    socket.emit('new rooms', data);
+    io.emit('new rooms', data);
     return null;
   });
 

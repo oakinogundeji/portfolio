@@ -1,17 +1,16 @@
 {
-  "host": "http://localhost",
-  "devURL": "http://localhost:3030",
+  "host": "https://kaizenify.herokuapp.com",
   "env": "production",
-  "dbURL": "mongodb://localhost/Vue RESTful Backend",
+  "dbURL": "mongodb://<user>:<pwd>@ds055574.mongolab.com:55574/kaizenify",
   "sessionSecret": "qwertyuiop123456789",
-"fb": {
-    "appID": "",
-    "appSecret": "",
-    "callbackURL": "http://localhost:3030/auth/facebook/callback"
+  "fb": {
+    "appID": " ",
+    "appSecret": " ",
+    "callbackURL": "https://kaizenify.herokuapp.com/auth/facebook/callback"
   },
   "twitter": {
-    "consumerKey": "",
-    "consumerSecret": "",
-    "callbackURL": "http://127.0.0.1:3030/auth/twitter/callback"
+    "consumerKey": " ",
+    "consumerSecret": " ",
+    "callbackURL": "https://kaizenify.herokuapp.com/auth/twitter/callback"
   }
 }

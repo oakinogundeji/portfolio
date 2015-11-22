@@ -5,13 +5,13 @@
   "dbURL": "mongodb://localhost/Kaizenify",
   "sessionSecret": "qwertyuiop123456789",
   "fb": {
-    "appID": "",
-    "appSecret": "",
+    "appID": " ",
+    "appSecret": " ",
     "callbackURL": "http://localhost:3030/auth/facebook/callback"
   },
   "twitter": {
-    "consumerKey": "",
-    "consumerSecret": "",
+    "consumerKey": " ",
+    "consumerSecret": " ",
     "callbackURL": "http://127.0.0.1:3030/auth/twitter/callback"
   }
 }
