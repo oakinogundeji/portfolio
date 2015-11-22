@@ -1,0 +1,52 @@
+body div {
+  position: relative;
+}
+
+.row {
+  margin-top: 20px;
+}
+.component {
+  margin: 10px 0;
+}
+
+.list-group-item p {
+  margin: 0;
+}
+.holder {
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+#addBookDiv .input-group {
+  width: 100%;
+  position: relative;
+}
+
+#addBookDiv .addBook {
+  margin: 5px 0;
+  width: 75%;
+}
+
+#addBookBtn {
+  position: relative;
+  left: 20px;
+  top: 20px;
+}
+
+.holder #bookList {
+  height: 165px;
+  overflow: auto;
+  padding: 5px;
+  /*border: 1px solid gray;*/
+}
+
+#bookList li:hover {
+  background-color: gray;
+  color: white;
+}
+
+.selected {
+  background-color: gray;
+  color: white;
+}

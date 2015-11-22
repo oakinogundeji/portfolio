@@ -7,15 +7,15 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link href="css/normalize.css" rel="stylesheet">
+        <link href="css/bStrap.css" rel="stylesheet">
+        <link href="css/fa/css/fontA.css" rel="stylesheet">
         <link href="css/styles.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="js/jQ-2.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.8/vue.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.6/vue-router.min.js"></script>
+        <script src="js/bStrap.js"></script>
+        <script src="js/vue.js"></script>
+        <script src="js/vue-router.js"></script>
         <!--The following corrects FB callback frag-->
         <script type="text/javascript">
           if (window.location.hash && window.location.hash == '#_=_') {
@@ -128,6 +128,7 @@
 
           </div>
           <router-view keep-alive></router-view>
+          <pre>{{$data | json}}</pre>
         </div>
       </script>
 

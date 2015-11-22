@@ -11,7 +11,7 @@ var
   express = require('express'),
   mongoose = require('mongoose'),
   path = require('path'),
-  //logger = require('morgan'),
+  logger = require('morgan'),
   bParser = require('body-parser'),
   session = require('express-session'),
   mongodbStore = require('connect-mongodb-session')(session);
@@ -93,7 +93,7 @@ process.on('SIGINT', function () {
 /**
 * Middleware setup
 */
-//app.use(logger('dev'));
+app.use(logger('dev'));
 
 app.use(bParser.json());
 
