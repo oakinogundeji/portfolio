@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Kaizenify | Chatrooms</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link href="css/styles.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.8/vue.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.6/vue-router.min.js"></script>
+        <!--The following corrects FB callback frag-->
+        <script type="text/javascript">
+          if (window.location.hash && window.location.hash == '#_=_') {
+              window.location.hash = '';
+            }
+        </script>
+    </head>
+    <body>
+
+      <div class="modal fade" id="chatManual">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">X</span></button>
+                <h1 class="modal-title"><span class="fa fa-sign-in"></span>Chatroom manual</h1>
+            </div>
+            <div class="modal-body row">
+              <div class="col-md-6">
+                <div>
+                  <h3>Rooms
+                    <ol>
+                      <li>The default room is <em>kaizenify.</em> You can
+                        create new chat rooms by clicking the <em>Create new chatroom
+                        </em> button</li>
+                      <li>Click on a room to see the room members displayed in
+                        the <b>Room Members of</b> box</li>
+                      <li>Double click on a room to join</li>
+                    </ol>
+                  </h3>
+                </div>
+                <div>
+                  <h3>Room Members of
+                    <ol>
+                      <li>Click on a room member to send a request for a private chat</li>
+                      <li>If private chat request is accepted a private chat
+                        <em>key</em> will be generated and shown in the
+                        <b>Private chat Keys</b> box, and instructions on use will
+                        be shown in the <b>Private chat Instructions</b> box</li>
+                    </ol>
+                  </h3>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <h3>Notes</h3>
+                  <ul>
+                    <li>This is a beta release so some features aren't yet available</li>
+                    <li>By default the server stores all chat messages of the
+                      <em>kaizenify</em> chat room. When you enter the chatrooms
+                      the last 15 messages will be displayed</li>
+                    <li>Messages in other chat rooms are not stored at this time.
+                    This feature will be enabled in the next feature release.</li>
+                    <li>Create new rooms to enable private chats with your friends</li>
+                    <li>Keep an eye on us as we plan to include video chats and
+                    upgraded profile features such as a private book collection,
+                     links to library APIs for book reviews, and an ebook reader</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary btn-lg"
+              data-dismiss="modal">Got it!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="app">
+        <router-view></router-view>
+      </div>
+
+      <script id="app-tmpl8" type="text/x-template">
+        <div class="container">
+          <app-nav></app-nav>
+          <div class="row" v-show="this.$route.path=='/'" >
+
+              <h1 id="abtHead">Welcome to Kaizenify</h1>
+              <div id="abtContent">
+                <div class="col-md-6">
+                  <p><strong>Kaizen</strong> is a Japanese concept that embodies
+                  the praxis of continuous improvement. A central concept of
+                  Kaizen is that significant results come from many small changes
+                   accumulated over time.</p>
+                  <p>Hence for us to become <strong>dramatically</strong> better
+                    over time - we make small improvements, one day at a time.</p>
+                  <p>The surest way we can become better is to become more
+                    knowledgeable so that we can gain deeper understanding through
+                     applying the knowledge we have ve acquired. We are therefore able
+                      to <strong>make better decisions</strong>over time.</p>
+                </div>
+                <div class="col-md-6">
+                  <p>In the world we live, <strong>the Internet</strong> is a
+                    major tool of knowledge acquisition - for good and for bad.
+                    For those of us who choose to leverage the power of the
+                    Internet to become better, we are limited only by our
+                    imagination.</p>
+                  <p>This is what Kaizenify brings to you... <strong>a tool to
+                    grow</strong> by tapping the knowledge of many others like
+                    you, who have or are studying the thoughts of great men and
+                    women preserved in books and who use the tools of real time
+                    communication and social networks to share and grow.</p>
+                  <p>This is what Kaizenify is about - using the power of the
+                  Internet,<strong>Real Time Communication</strong> via chat and
+                  video as well as <strong>Social Platforms</strong> to aid us
+                  in becoming better.</p>
+                </div>
+              </div>
+
+          </div>
+          <router-view keep-alive></router-view>
+        </div>
+      </script>
+
+      <script id="app-nav-tmpl8" type="text/x-template">
+        <div class="row">
+          <ul class="nav nav-tabs">
+            <li><a v-link="{path: '/', exact: true }">About</a></li>
+            <li><a v-link="{name: 'chatrooms'}">Chatrooms</a></li>
+            <li><a v-link="{name: 'profile'}">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div>
+      </script>
+
+      <script id="app-chatrooms-tmpl8" type="text/x-template">
+        <div class="row">
+          <div class="col-md-5">
+            <div id="chat-container">
+              <p id="title">{{{chatUserName}}}</p>
+              <div id="chat-display" class="border">
+                <p v-for="item in chatRoomsDisplayMsgs">{{{item}}}</p>
+              </div>
+              <div id="chat">
+                <form @submit.prevent.stop="onSend">
+                  <input type="text" id="msg" class="border" v-model="chatMsg"><!--
+                  --><input type="button" id="send"
+                  class="btn btn-success btn-default" value="Send"
+                  @click.prevent.stop="onSend" :class="isValid"><!--
+                  -->
+                  <br>
+                  <input type="button" class="btn btn-warning btn-default" data-toggle="modal"
+                  data-target="#chatManual" value="Chatroom Manual" id="chatInfoManual">
+                  <input type="button" id="cr8Room" @click="cr8Room"
+                  class="btn btn-info btn-default" value="Create new Chat room">
+                </form>
+              </div>
+            </div>
+          </div>
+          <div id="chatInfo">
+            <div class="col-sm-4">
+              <div id="chatRooms" class="border sideDisplay">
+                  <div>
+                    <p class="text-center">Rooms</p>
+                  </div>
+                  <div class="list-group">
+                    <a href="#" class="list-group-item" v-for="item in chatRooms"
+                    @click.prevent.stop="showMembers(item)"
+                    @dblclick="joinRoom(item)">{{item}}</a>
+                  </div>
+              </div>
+              <div class="col-sm-3" v-show="cr8RoomReq">
+                <div id="cr8NewRoom">
+                  <div class="input-group">
+                    <input type="text" autofocus class="form-control" v-model="newRoom"
+                    @keyup.enter.prevent.stop="addRoom">
+                    <input type="button" class="btn btn-success btn-default"
+                    @click.prevent.stop="addRoom" value="Add New Room">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div id="roomMembers" class="border sideDisplay">
+                <div>
+                  <p class="text-center">Room Members of {{room}}</p>
+                </div>
+                <div class="list-group">
+                  <a href="" class="list-group-item" v-for="item in roomMembers"
+                  @click.prevent.stop="initPrivateChat(item)">{{item}}</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div id="privateChat" class="border sideDisplay">
+                <p class="text-center">Private chat instructions</p>
+                <br>
+                {{{pChatInstructions}}}
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div id="pChatKeys" class="border sideDisplay">
+                <div>
+                  <p class="text-center">Private chat Keys</p>
+                </div>
+                <div class="">
+                  <p v-for="item in pChatKeys">{{item}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </script>
+
+      <script id="app-profile-tmpl8" type="text/x-template">
+        <div class="row" id="userBio">
+          <div class="col-md-6" id="userPhoto">
+            <div>
+              <figure class="col-md-5">
+                <div id="userPix">
+                  <img :src="userphoto" alt="" class="img-responsive img-rounded">
+                </div>
+                <br>
+                <button class="btn btn-primary btn-sm">Edit Photo</button>
+              </figure>
+            </div>
+          </div>
+          <section class="col-md-6" id="userInfo">
+            <h1>Bio</h1>
+            <ul>
+              <li>Name: {{{username}}}</li>
+              <li>eMail: {{useremail}}</li>
+            </ul>
+            <div class="row" id="socialMedia">
+              <h3>Social Media Information</h3>
+              <div class="col-sm-6" id="fbInfo">
+                <div class="well" @click="showInfo('fb')">
+                  <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+                </div>
+                <div class="smInfo" v-show="showSmInfo == 'fb'">
+                  <p>Facebook display name: {{{fbname}}}</p>
+                  <p>Facebook email: {{email}}</p>
+                </div>
+              </div>
+              <div class="col-sm-6" id="twitterInfo">
+                <div class="well" @click="showInfo('twitter')">
+                   <h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
+                </div>
+                <div class="smInfo" v-show="showSmInfo == 'twitter'">
+                  <p>Twitter display name: {{{twittername}}}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </script>
+
+      <script>
+        var
+          localemail = '<%=localemail%>',
+          fbEmail = '<%=fbEmail%>',
+          fbPhoto = '<%=fbPhoto%>',
+          fbDisplayName = '<%=fbDisplayName%>',
+          twitterPhoto =  '<%=twitterPhoto%>',
+          twitterDisplayName = '<%=twitterDisplayName%>'
+        console.log(localemail);
+        console.log(fbEmail);
+        console.log(fbPhoto);
+        console.log(fbDisplayName);
+        console.log(twitterPhoto);
+        console.log(twitterDisplayName);
+        window.userdata = {
+          localemail: localemail,
+          fbEmail: fbEmail,
+          fbPhoto: fbPhoto,
+          fbDisplayName: fbDisplayName,
+          twitterPhoto: twitterPhoto,
+          twitterDisplayName: twitterDisplayName
+          };
+      </script>
+
+
+      <script src="js/kaizenify.js"></script>
+
+    </body>
+</html>

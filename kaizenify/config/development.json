@@ -1,0 +1,17 @@
+{
+  "host": "http://127.0.0.1",
+  "devURL": "http://127.0.0.1:3030",
+  "env": "development",
+  "dbURL": "mongodb://localhost/Kaizenify",
+  "sessionSecret": "qwertyuiop123456789",
+  "fb": {
+    "appID": "1725335461028228",
+    "appSecret": "101ed418299489a1d5ab945ae11f1911",
+    "callbackURL": "http://localhost:3030/auth/facebook/callback"
+  },
+  "twitter": {
+    "consumerKey": "umQV0E2HUHWmcnk3xSqU78BUV",
+    "consumerSecret": "kp4oZjvAjn7KWKPWtqrXyAEqYTG38WLOyDYjhxOlARIuFBsRvQ",
+    "callbackURL": "http://127.0.0.1:3030/auth/twitter/callback"
+  }
+}

@@ -1,0 +1,279 @@
+/**
+* Landing page and Login/Signup
+*/
+
+@font-face {
+    font-family: Geotica;
+    src: url('../fonts/Geotica.otf');
+}
+
+@font-face {
+    font-family: Bonveno;
+    src: url('../fonts/BonvenoCF.otf');
+}
+
+@font-face {
+    font-family: Caviar;
+    src: url('../fonts/CaviarDreams.ttf');
+}
+
+@font-face {
+    font-family: Dekar;
+    src: url('../fonts/Dekar Light.otf');
+}
+
+body {
+  position: relative;
+}
+
+#content {
+  background-image: url('../imgs/work2.jpg');
+  background-size: cover;
+  width: 100%;
+  position: relative;
+}
+
+.jumbotron {
+    background-image: url('../imgs/vista.jpg');
+    background-size: cover;
+    width: 100%;
+    position: relative;
+    top: 200px;
+}
+
+.center {
+  text-align: center;
+}
+
+.topMargin {
+  margin-top: 60px;
+}
+
+.title {
+  font-size: 5em;
+  font-family: Geotica;
+  font-weight: bold;
+}
+
+.lead, p {
+  font-family: Bonveno;
+  font-weight: 300;
+}
+
+.lead {
+  font-size: 2.5em;
+}
+
+.lead+p {
+  font-size: 2em;
+}
+
+.cta-btn {
+  font-size: 1.5em;
+  margin-top: 20px;
+}
+
+.navbar {
+  background: none;
+  border: none;
+  position: relative;
+}
+
+.navbar-nav {
+  position: relative;
+  right: 15px;
+}
+
+
+.quote {
+  margin-top: 10px;
+  padding: 7px 11px;
+  /*background: #555;
+  color: #ccc;
+  position: relative;
+  top: 280px;*/
+  border-radius: 7px;
+  border-left: 0;
+  text-align: left;
+  display: inline-block;
+  float: left;
+  margin-bottom: 0;
+}
+
+.quote p, .quote footer {
+  font-size: 1em;
+  color: black;
+}
+
+.quote p {
+  font-family: Caviar;
+  font-style: italic;
+  line-height: 17px;
+}
+
+.col-md-4  p, #abtContent .col-md-6 p {
+  font-size: 1.2em;
+}
+
+#homeLink, #aboutLink {
+  font-size: 1.2em;
+  font-weight: bold;
+  font-family: Dekar;
+  color: #000;
+}
+
+#homeLink:hover, #aboutLink:hover {
+  color: white;
+}
+
+#info {
+  margin-top: 10px;
+}
+
+
+/**
+* Chat Styles
+*/
+.row {
+  margin-top: 20px;
+}
+
+.col-sm-4 {
+  padding: 0;
+  display: inline-block;
+  width: 210px;
+}
+
+.border {
+  border-radius: 5px;
+}
+
+.sideDisplay {
+  position: relative;
+  height: 150px;
+  width: 200px;
+  margin-left: 10px;
+}
+
+.chatInstructions {
+  display: block;
+}
+
+.chatMembersList {
+  text-align: center;
+  text-decoration: underline;
+  font-style: italic;
+  font-size: bold;
+  color: grey;
+}
+
+.chatMember {
+  font-family: monospace;
+  color: blue;
+  font-weight: 300;
+  padding-left: 10px;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+
+.chatMembersList, .chatMember {
+  margin: 5px 0;
+}
+
+.serverMsg, .chatMsg, .chatInstructions {
+  margin: 7px 0 0;
+  padding: 0 0 0 5px;
+}
+
+.serverMsg {
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+}
+
+#title {
+  margin: 5px 0;
+}
+
+#abtHead {
+  text-align: center;
+  margin: 15px 0;
+}
+
+#abtContent p {
+  line-height: 1.8em;
+}
+
+#chat-display, #roomMembers, #privateChat, #chatRooms, #pChatKeys {
+  border: 2px solid black;
+  display: inline-block;
+  overflow: auto;
+}
+
+#chat-display {
+  height: 500px;
+  width: 350px;
+  margin-bottom: 10px;
+}
+
+#chatInfoManual, #cr8Room {
+  /*width: 120px;*/
+  position: relative;
+  top: 10px;
+  left: 20px;
+}
+
+#chatInfo {
+  margin-top: 40px;
+}
+
+#chatRooms {
+  border: 2px solid green;
+  position: relative;
+}
+
+#roomMembers {
+  border: 2px solid blue;
+  position: relative;
+}
+
+#privateChat {
+  border: 2px solid red;
+  position: relative;
+}
+
+#msg {
+  width: 275px;
+}
+
+#send, #pChattoggle {
+  width: 60px;
+  margin-left: 10px;
+}
+
+#userPix img {
+  width: 100%;
+}
+
+#cr8NewRoom input {
+  margin: 10px;
+}
+
+.chatInfoManual {
+  margin: 10px 0;
+}
+
+.chatInfoManual button {
+  position: relative;
+  left: 120px;
+}
+/*#msg, #send, #chatInfoManual, #pChattoggle {
+  height: 25px;
+  border: 1px solid black;
+}
+
+#pChattoggle {
+  position: relative;
+  bottom: 10px;
+}*/
