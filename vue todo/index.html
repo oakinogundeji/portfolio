@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>VUE Todo App | Telios WebDev</title>
+  <link rel="stylesheet" href="libs/css/normalize.css">
+  <link rel="stylesheet" href="libs/css/bStrap.css">
+
+  <script src="libs/js/jQ-2.js"></script>
+  <script src="libs/js/vue.js"></script>
+
+  <style>
+    .border {
+      border: 1px solid black;
+      border-radius: 10px;
+    }
+    #todo {
+      margin-top: 60px;
+    }
+    #todo li {
+      display: inline-block;
+      margin: 0 auto;
+      padding-left: 10px;
+    }
+    .input-group {
+      position: relative;
+    }
+    #addTodo {
+      float: right;
+    }
+    #markAllComplete {
+      float: left;
+    }
+    #todoList {
+      padding: 10px;
+    }
+    #todoList input, #todoList button {
+      margin-top: 5px;
+    }
+    #todoListItems {
+      margin-top: 10px;
+    }
+    #todoListItems button {
+      float: right;
+      background: none;
+      border: none;
+      color: red;
+    }
+    #todoListItems p {
+      padding: 10px;
+      font-size: 18px;
+    }
+    #todoListItems input[type="checkbox"] {
+      padding: 5px;
+    }
+    #todoListItems h3 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3" id="todo">
+        <h1 class="text-center">Vue Todo App</h1>
+        <div class="border" id="todoList">
+          <div class="input-group">
+            <input type="text" class="form-control" v-model="todoItem"
+            @keyup.enter="addTodo">
+            <button class="btn btn-success btn-default" id="addTodo"
+            @click="addTodo">Add Todo</button>
+            <button v-show="remainingItems" class="btn btn-info btn-default"
+            @click="markAllItemsComplete"
+            id="markAllComplete">Mark All Complete</button>
+          </div>
+          <br>
+          <ul>
+            <li><a href=""
+              @click.stop.prevent="showAll">All Items: {{allItems}}</a></li>
+            <li><a href=""
+              @click.stop.prevent="showRemaining">Remaning Items: {{remainingItems}}</a></li>
+            <li><a href=""
+              @click.stop.prevent="showCompleted">Completed Items: {{completedItems}}</a></li>
+          </ul>
+          <div class="border" id="todoListItems">
+            <h3 v-show="showListName">{{listName}} Items</h3>
+            <p v-for="item in displayList"
+             @dblClick.stop.prevent="editItem(item, listName)">
+              <input type="checkbox" @click.stop.prevent="markComplete(item, $event)">
+              <span>{{item}}</span>
+              <button @click.stop.prevent="removeItem(item, listName)">X</button>
+            </p>
+          </div>
+        </div>
+        <pre>{{$data | json}}</pre>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
